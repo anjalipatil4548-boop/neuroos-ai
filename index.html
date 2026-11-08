@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroOS - AI Operating System Project</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>:root{--bg:#0c1117;--panel:#141b24;--ink:#e6edf3;--muted:#8b98a9;--accent:#b6f24a;--accent2:#8f7bff;--line:#243040}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 "Space Grotesk",system-ui,sans-serif}
+code,pre,.mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(12,17,23,.92);backdrop-filter:blur(8px);z-index:5}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font:700 20px "JetBrains Mono",monospace;color:var(--ink);text-decoration:none}
+.logo span{color:var(--accent)}
+nav a{color:var(--muted);text-decoration:none;margin-left:22px;font-weight:500}
+nav a:hover,nav a.active{color:var(--accent)}
+.hero{padding:88px 0 72px}
+.tag{display:inline-block;border:1px solid var(--accent2);color:var(--accent2);padding:4px 14px;border-radius:999px;font:500 13px "JetBrains Mono",monospace}
+h1{font-size:clamp(42px,7vw,80px);line-height:1;letter-spacing:-.03em;margin:22px 0}
+h1 em{font-style:normal;color:var(--accent)}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.02em;margin:0 0 28px}
+.lead{max-width:52ch;color:var(--muted);font-size:20px}
+.btn{display:inline-block;background:var(--accent);color:#0c1117;padding:13px 26px;border-radius:8px;font-weight:700;text-decoration:none;margin:28px 12px 0 0}
+.btn.ghost{background:none;color:var(--ink);border:1px solid var(--line)}
+section{padding:64px 0;border-top:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card h3{margin:0 0 8px;font-size:21px}
+.card p{margin:0;color:var(--muted)}
+.card .n{font:700 14px "JetBrains Mono",monospace;color:var(--accent2)}
+pre{background:#080c11;border:1px solid var(--line);border-radius:10px;padding:18px;overflow-x:auto;font-size:14px;line-height:1.6}
+.layers{display:flex;flex-direction:column;gap:10px;max-width:560px}
+.layers div{padding:16px 20px;border-radius:10px;border:1px solid var(--line);background:var(--panel)}
+.layers div:nth-child(1){border-left:5px solid var(--accent)}
+.layers div:nth-child(2){border-left:5px solid var(--accent2)}
+.layers div:nth-child(3){border-left:5px solid #ff9f5a}
+.layers div:nth-child(4){border-left:5px solid #5ac8ff}
+.term{background:#05080c;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.term .bar{background:var(--panel);padding:10px 16px;font:13px "JetBrains Mono",monospace;color:var(--muted)}
+#out{height:380px;overflow-y:auto;padding:16px;font:14px/1.6 "JetBrains Mono",monospace;white-space:pre-wrap}
+.row{display:flex;border-top:1px solid var(--line)}
+.row span{padding:12px 0 12px 16px;color:var(--accent);font:14px "JetBrains Mono",monospace}
+#in{flex:1;background:none;border:0;color:var(--ink);padding:12px;font:14px "JetBrains Mono",monospace;outline:none}
+.ai{color:var(--accent2)}.err{color:#ff7b72}.ok{color:var(--accent)}
+footer{padding:32px 0;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+@media(max-width:800px){.grid{grid-template-columns:1fr}nav a{margin-left:12px}.hero{padding:48px 0}}
+
+:root{color-scheme:dark}
+html{scroll-padding-top:80px}
+.hero{padding:96px 0 80px}
+.stats{display:flex;flex-wrap:wrap;gap:32px;margin-top:48px}
+.stats b{display:block;font:700 34px "JetBrains Mono",monospace;color:var(--accent)}
+.stats span{color:var(--muted);font-size:15px}
+nav a{margin-left:18px}
+@media(max-width:640px){nav a:nth-child(n+4){display:none}}
+</style></head><body>
+<header class="top"><div class="wrap"><a class="logo" href="#home">Neuro<span>OS</span></a>
+<nav><a href="#features">Features</a><a href="#architecture">Architecture</a><a href="#demo">Demo</a><a href="#code">Code</a></nav></div></header>
+<main>
+<div class="wrap hero" id="home"><span class="tag">custom OS + AI</span>
+<h1>An operating system that <em>understands you.</em></h1>
+<p class="lead">NeuroOS is a small custom operating system with an AI assistant built into its core. Talk to it in plain English to manage files, memory and tasks.</p>
+<a class="btn" href="#demo">Try the live demo</a><a class="btn ghost" href="#architecture">How it is built</a>
+<div class="stats"><div><b>4</b><span>system layers</span></div><div><b>3</b><span>languages: ASM, C, Python</span></div><div><b>7</b><span>source files</span></div></div></div>
+
+<section id="features"><div class="wrap"><h2>Features</h2><div class="grid">
+<div class="card"><span class="n">BOOT</span><h3>Custom bootloader</h3><p>Starts the computer and shows the NeuroOS message, written in assembly.</p></div>
+<div class="card"><span class="n">AI</span><h3>Smart scheduler</h3><p>Gives CPU time to the tasks you use most, and learns from usage.</p></div>
+<div class="card"><span class="n">ASSIST</span><h3>Neuro assistant</h3><p>Understands plain English requests like "how is my memory?".</p></div>
+<div class="card"><span class="n">MEMORY</span><h3>Memory manager</h3><p>Gives each program a block of memory and frees it when done.</p></div>
+<div class="card"><span class="n">SHELL</span><h3>Command shell</h3><p>Simple commands such as ls, tasks and ai.</p></div>
+<div class="card"><span class="n">PREDICT</span><h3>Usage predictor</h3><p>Learns which app you open next and gets ready for it.</p></div>
+</div></div></section>
+
+<section id="architecture"><div class="wrap"><h2>Architecture</h2>
+<div class="layers"><div><b>AI Assistant</b><br>ai/assistant.py and ai/usage_predictor.py</div>
+<div><b>Shell</b><br>os/shell.c reads commands and runs them</div>
+<div><b>Kernel, Scheduler, Memory</b><br>os/kernel.c, scheduler.c and memory.c manage the system</div>
+<div><b>Bootloader</b><br>os/boot.asm starts the machine</div></div></div></section>
+
+<section id="demo"><div class="wrap"><h2>Live demo</h2>
+<p class="lead">Type commands below. Try <code>help</code>, <code>ls</code>, <code>tasks</code> or <code>ai how is my memory</code>.</p>
+<div class="term" style="margin-top:28px"><div class="bar">neuro-sh - NeuroOS 0.1</div><div id="out"></div>
+<div class="row"><span>neuro@os:~$</span><input id="in" autocomplete="off" aria-label="Command"></div></div></div></section>
+
+<section id="code"><div class="wrap"><h2>Source code</h2>
+<p class="lead">All 7 project files, shown here.</p><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">os/boot.asm</h3><pre>; NeuroOS bootloader (16-bit real mode, NASM)
+; Build: nasm -f bin boot.asm -o neuroos.img
+[org 0x7c00]
+
+start:
+    mov si, message        ; point SI to the text
+    call print             ; print it
+    jmp $                  ; stop here forever
+
+print:
+    mov ah, 0x0e           ; BIOS teletype function
+.next:
+    lodsb                  ; load next character into AL
+    or al, al              ; end of string?
+    jz .done
+    int 0x10               ; print character
+    jmp .next
+.done:
+    ret
+
+message db &#x27;NeuroOS booting... AI core ready.&#x27;, 0
+
+times 510 - ($ - $$) db 0  ; pad to 512 bytes
+dw 0xAA55                  ; boot signature
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">os/kernel.c</h3><pre>/* NeuroOS kernel (concept code, simplified for learning) */
+#include &lt;stdio.h&gt;
+#include &quot;scheduler.h&quot;
+
+int main(void) {
+    printf(&quot;NeuroOS kernel 0.1 started\n&quot;);
+    scheduler_init();
+    scheduler_add(&quot;shell&quot;, 5);
+    scheduler_add(&quot;neuro-ai&quot;, 3);
+    scheduler_add(&quot;backup&quot;, 1);
+    for (int tick = 0; tick &lt; 6; tick++) {
+        scheduler_run_tick();
+    }
+    return 0;
+}
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">os/scheduler.c</h3><pre>/* AI-style scheduler: tasks that are used more get a higher score */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &quot;scheduler.h&quot;
+
+#define MAX_TASKS 8
+
+typedef struct { char name[16]; int priority; int usage; } Task;
+static Task tasks[MAX_TASKS];
+static int count = 0;
+
+void scheduler_init(void) { count = 0; }
+
+void scheduler_add(const char *name, int priority) {
+    if (count &gt;= MAX_TASKS) return;
+    strncpy(tasks[count].name, name, 15);
+    tasks[count].priority = priority;
+    tasks[count].usage = 0;
+    count++;
+}
+
+void scheduler_run_tick(void) {
+    int best = 0, best_score = -1;
+    for (int i = 0; i &lt; count; i++) {
+        int score = tasks[i].priority * 2 + tasks[i].usage;  /* learns from usage */
+        if (score &gt; best_score) { best_score = score; best = i; }
+    }
+    tasks[best].usage++;
+    printf(&quot;tick: running %s (score %d)\n&quot;, tasks[best].name, best_score);
+}
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">os/memory.c</h3><pre>/* NeuroOS memory manager demo: simple block allocator */
+#include &lt;stdio.h&gt;
+
+#define TOTAL_BLOCKS 16          /* 16 blocks x 128 KB = 2048 KB */
+static int used[TOTAL_BLOCKS];
+
+int mem_alloc(int blocks) {
+    int run = 0;
+    for (int i = 0; i &lt; TOTAL_BLOCKS; i++) {
+        run = used[i] ? 0 : run + 1;
+        if (run == blocks) {
+            int start = i - blocks + 1;
+            for (int j = start; j &lt;= i; j++) used[j] = 1;
+            return start;
+        }
+    }
+    return -1;                   /* out of memory */
+}
+
+void mem_free(int start, int blocks) {
+    for (int i = start; i &lt; start + blocks; i++) used[i] = 0;
+}
+
+void mem_status(void) {
+    int n = 0;
+    printf(&quot;[&quot;);
+    for (int i = 0; i &lt; TOTAL_BLOCKS; i++) { printf(used[i] ? &quot;#&quot; : &quot;.&quot;); n += used[i]; }
+    printf(&quot;] %d/%d blocks used\n&quot;, n, TOTAL_BLOCKS);
+}
+
+int main(void) {
+    int a = mem_alloc(4), b = mem_alloc(6);
+    printf(&quot;shell got block %d, neuro-ai got block %d\n&quot;, a, b);
+    mem_status();
+    mem_free(a, 4);
+    mem_status();
+    return 0;
+}
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">os/shell.c</h3><pre>/* NeuroOS shell demo: reads commands and runs them */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main(void) {
+    char line[128];
+    printf(&quot;neuro-sh 0.1 (type help, exit to quit)\n&quot;);
+    while (1) {
+        printf(&quot;neuro@os:~$ &quot;);
+        if (!fgets(line, sizeof line, stdin)) break;
+        line[strcspn(line, &quot;\n&quot;)] = 0;
+        if (strcmp(line, &quot;exit&quot;) == 0) break;
+        else if (strcmp(line, &quot;help&quot;) == 0) printf(&quot;help, about, exit\n&quot;);
+        else if (strcmp(line, &quot;about&quot;) == 0) printf(&quot;NeuroOS 0.1 - AI learning OS\n&quot;);
+        else if (line[0]) printf(&quot;command not found: %s\n&quot;, line);
+    }
+    return 0;
+}
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">ai/assistant.py</h3><pre>&quot;&quot;&quot;Neuro - the NeuroOS assistant (simple intent matching, no libraries needed).
+Run:  python3 assistant.py
+&quot;&quot;&quot;
+
+INTENTS = {
+    &quot;cpu&quot;:      ([&quot;cpu&quot;, &quot;slow&quot;, &quot;speed&quot;],      &quot;CPU load is 23%. Background tasks set to low priority.&quot;),
+    &quot;memory&quot;:   ([&quot;memory&quot;, &quot;ram&quot;],             &quot;Memory: 412 MB used of 2048 MB.&quot;),
+    &quot;files&quot;:    ([&quot;file&quot;, &quot;find&quot;, &quot;open&quot;],      &quot;Found 4 files in /home.&quot;),
+    &quot;security&quot;: ([&quot;virus&quot;, &quot;secure&quot;, &quot;safe&quot;],   &quot;Security scan finished. 0 threats found.&quot;),
+    &quot;greeting&quot;: ([&quot;hello&quot;, &quot;hi&quot;, &quot;hey&quot;],        &quot;Hello! I am Neuro.&quot;),
+}
+
+def understand(text):
+    &quot;&quot;&quot;Return the best matching intent for the user&#x27;s text.&quot;&quot;&quot;
+    words = text.lower().split()
+    best, best_hits = None, 0
+    for name, (keywords, _) in INTENTS.items():
+        hits = sum(1 for k in keywords if any(k in w for w in words))
+        if hits &gt; best_hits:
+            best, best_hits = name, hits
+    return best
+
+def reply(text):
+    intent = understand(text)
+    return INTENTS[intent][1] if intent else &quot;I am still learning. Ask about cpu, memory, files or security.&quot;
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Neuro assistant. Type &#x27;exit&#x27; to quit.&quot;)
+    while True:
+        q = input(&quot;you&gt; &quot;)
+        if q.strip().lower() == &quot;exit&quot;:
+            break
+        print(&quot;neuro&gt;&quot;, reply(q))
+</pre><h3 class="mono" style="font-size:16px;color:var(--accent2);margin:32px 0 10px">ai/usage_predictor.py</h3><pre>&quot;&quot;&quot;Learns which app you open most and predicts the next one.
+Run: python3 usage_predictor.py
+&quot;&quot;&quot;
+from collections import Counter, defaultdict
+
+class UsagePredictor:
+    def __init__(self):
+        self.after = defaultdict(Counter)   # app -&gt; counts of what came next
+        self.last = None
+
+    def record(self, app):
+        if self.last:
+            self.after[self.last][app] += 1
+        self.last = app
+
+    def predict(self, app):
+        counts = self.after.get(app)
+        return counts.most_common(1)[0][0] if counts else None
+
+if __name__ == &quot;__main__&quot;:
+    p = UsagePredictor()
+    for app in [&quot;browser&quot;, &quot;notes&quot;, &quot;browser&quot;, &quot;notes&quot;, &quot;browser&quot;, &quot;music&quot;, &quot;browser&quot;, &quot;notes&quot;]:
+        p.record(app)
+    print(&quot;After &#x27;browser&#x27; you usually open:&quot;, p.predict(&quot;browser&quot;))
+</pre></div></section>
+</main>
+<footer><div class="wrap">&copy; 2026 NeuroOS - a student AI operating system project.</div></footer>
+<script>// NeuroOS demo shell (runs in the browser, simulated)
+const out = document.getElementById('out');
+const input = document.getElementById('in');
+const history = []; let h = 0;
+
+const files = { 'boot.asm':'bootloader', 'kernel.c':'kernel core', 'scheduler.c':'AI task scheduler', 'assistant.py':'AI assistant' };
+
+function print(text, cls) {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  d.textContent = text;
+  out.appendChild(d);
+  out.scrollTop = out.scrollHeight;
+}
+
+// Tiny rule-based "AI": matches keywords to answers
+function askAI(q) {
+  q = q.toLowerCase();
+  if (/cpu|slow|fast|speed/.test(q)) return 'CPU load is 23%. The AI scheduler moved 2 background tasks to low priority.';
+  if (/memory|ram/.test(q)) return 'Memory: 412 MB used of 2048 MB. No leaks detected.';
+  if (/file|find|open/.test(q)) return 'I found ' + Object.keys(files).length + ' files in /home. Type "ls" to see them.';
+  if (/hello|hi|hey/.test(q)) return 'Hello! I am Neuro, the assistant built into NeuroOS.';
+  if (/who|what are you|name/.test(q)) return 'I am Neuro, a small AI assistant that helps you control the OS using plain English.';
+  if (/secure|virus|safe/.test(q)) return 'Security scan complete. 0 threats found.';
+  return 'I am still learning. Try asking about cpu, memory, files or security.';
+}
+
+const commands = {
+  help: () => 'Commands: help, about, ls, neofetch, tasks, date, clear, ai <question>',
+  about: () => 'NeuroOS 0.1 - a small learning OS with a built-in AI assistant.',
+  ls: () => Object.entries(files).map(([f, d]) => f.padEnd(14) + '- ' + d).join('\n'),
+  date: () => new Date().toString(),
+  tasks: () => 'PID  NAME          AI PRIORITY\n1    kernel        high\n2    shell         high\n3    neuro-ai      medium\n4    backup        low',
+  neofetch: () => 'NeuroOS 0.1\nKernel : neuro-kernel 0.1\nShell  : neuro-sh\nAI     : Neuro assistant\nUptime : ' + Math.floor(performance.now() / 1000) + ' seconds',
+  clear: () => { out.innerHTML = ''; return null; }
+};
+
+function run(line) {
+  print('neuro@os:~$ ' + line, 'ok');
+  const [cmd, ...rest] = line.trim().split(' ');
+  if (!cmd) return;
+  if (cmd === 'ai') {
+    print('Neuro: ' + askAI(rest.join(' ')), 'ai');
+  } else if (commands[cmd]) {
+    const r = commands[cmd](); if (r) print(r);
+  } else {
+    print('command not found: ' + cmd + ' (type help)', 'err');
+  }
+}
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { history.push(input.value); h = history.length; run(input.value); input.value = ''; }
+  if (e.key === 'ArrowUp' && h > 0) input.value = history[--h];
+  if (e.key === 'ArrowDown') input.value = history[++h] || '';
+});
+print('Welcome to NeuroOS. Type "help" to start.', 'ai');
+</script></body></html>
